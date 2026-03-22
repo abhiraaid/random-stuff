@@ -1,0 +1,154 @@
+{
+  "9": {
+    "inputs": {
+      "filename_prefix": "z-image",
+      "images": [
+        "65",
+        0
+      ]
+    },
+    "class_type": "SaveImage",
+    "_meta": {
+      "title": "Save Image"
+    }
+  },
+  "63": {
+    "inputs": {
+      "vae_name": "ae.safetensors"
+    },
+    "class_type": "VAELoader",
+    "_meta": {
+      "title": "Load VAE"
+    }
+  },
+  "65": {
+    "inputs": {
+      "samples": [
+        "69",
+        0
+      ],
+      "vae": [
+        "63",
+        0
+      ]
+    },
+    "class_type": "VAEDecode",
+    "_meta": {
+      "title": "VAE Decode"
+    }
+  },
+  "67": {
+    "inputs": {
+      "text": "",
+      "clip": [
+        "83",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Positive Prompt)"
+    }
+  },
+  "68": {
+    "inputs": {
+      "width": 256,
+      "height": 256,
+      "batch_size": 1
+    },
+    "class_type": "EmptySD3LatentImage",
+    "_meta": {
+      "title": "EmptySD3LatentImage"
+    }
+  },
+  "69": {
+    "inputs": {
+      "seed": 42,
+      "steps": 25,
+      "cfg": 4,
+      "sampler_name": "res_multistep",
+      "scheduler": "simple",
+      "denoise": 1,
+      "model": [
+        "70",
+        0
+      ],
+      "positive": [
+        "67",
+        0
+      ],
+      "negative": [
+        "71",
+        0
+      ],
+      "latent_image": [
+        "68",
+        0
+      ]
+    },
+    "class_type": "KSampler",
+    "_meta": {
+      "title": "KSampler"
+    }
+  },
+  "70": {
+    "inputs": {
+      "shift": 3,
+      "model": [
+        "76",
+        0
+      ]
+    },
+    "class_type": "ModelSamplingAuraFlow",
+    "_meta": {
+      "title": "ModelSamplingAuraFlow"
+    }
+  },
+  "71": {
+    "inputs": {
+      "text": "color",
+      "clip": [
+        "83",
+        0
+      ]
+    },
+    "class_type": "CLIPTextEncode",
+    "_meta": {
+      "title": "CLIP Text Encode (Negative Prompt)"
+    }
+  },
+  "76": {
+    "inputs": {
+      "lora_name": "ZenInkWashZBase.safetensors",
+      "strength_model": 0.9,
+      "model": [
+        "102",
+        0
+      ]
+    },
+    "class_type": "LoraLoaderModelOnly",
+    "_meta": {
+      "title": "Load LoRA"
+    }
+  },
+  "83": {
+    "inputs": {
+      "clip_name": "qwen_3_4b.safetensors",
+      "type": "stable_diffusion",
+      "device": "default"
+    },
+    "class_type": "CLIPLoader",
+    "_meta": {
+      "title": "Load CLIP"
+    }
+  },
+  "102": {
+    "inputs": {
+      "unet_name": "z_image_bf16.safetensors"
+    },
+    "class_type": "UNETLoaderUnified",
+    "_meta": {
+      "title": "Smart Model Loader MXD"
+    }
+  }
+}
